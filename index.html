@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="assets/images/IMG_20251015_165654_237 (1).jpg"
+    />
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -461,8 +466,7 @@
       }
 
       unlockBtn.addEventListener("click", () => {
-        // Temporary dev bypass: open the letter immediately.
-        revealLetter();
+        keyInputs[0].focus();
       });
 
       musicToggle.addEventListener("click", () => {
