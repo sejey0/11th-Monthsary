@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'handwriting': ['"Caveat"', 'cursive'],
+                        'seal': ['"UnifrakturMaguntia"', 'cursive'],
+                    },
+                    colors: {
+                        'paper': '#F4ECE1',
+                        'ink': '#2C2A28',
+                        'wax': '#8B2121',
+                        'wax-dark': '#5E1313'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth fade transitions */
+        .fade-transition {
+            transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
+        }
+        
+        /* Advanced Paper Texture with noise, vignette, and fold lines */
+        .paper-texture {
+            background-color: #F4ECE1;
+            background-image: 
+                /* Subtle Noise */
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E"),
+                /* Vignette (darker edges) */
+                radial-gradient(circle at center, transparent 40%, rgba(139, 115, 85, 0.15) 100%),
+                /* Vertical fold crease */
+                linear-gradient(to right, transparent 49.8%, rgba(0,0,0,0.03) 50%, rgba(255,255,255,0.2) 50.2%, transparent 50.4%),
+                /* Horizontal fold creases */
+                linear-gradient(to bottom, transparent 33%, rgba(0,0,0,0.02) 33.2%, rgba(255,255,255,0.15) 33.4%, transparent 33.6%),
+                linear-gradient(to bottom, transparent 66%, rgba(0,0,0,0.02) 66.2%, rgba(255,255,255,0.15) 66.4%, transparent 66.6%);
+            box-shadow: 
+                0 20px 40px -10px rgba(0,0,0,0.2),
+                inset 0 0 60px rgba(139, 115, 85, 0.1);
+        }
+
+        /* Polaroid Photo Styling */
+        .polaroid {
+            background: white;
+            padding: 12px 12px 40px 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        .polaroid:hover {
+            transform: scale(1.02) rotate(-1deg);
+            z-index: 10;
+        }
+
+        /* Wax Seal Styling */
+        .wax-seal {
+            box-shadow: 
+                inset 0 0 10px rgba(0,0,0,0.5),
+                0 5px 15px rgba(0,0,0,0.5),
+                0 0 0 4px #8B2121,
+                0 0 0 5px #5E1313;
+        }
+
+        /* Drop Cap for the first paragraph */
+        .drop-cap::first-letter {
+            font-size: 3.5rem;
+            float: left;
+            line-height: 0.8;
+            padding-right: 0.5rem;
+            padding-top: 0.2rem;
+            color: #5E1313;
+            font-family: '"Playfair Display"', serif;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')] bg-stone-900 min-h-screen flex items-center justify-center p-4 sm:p-8 antialiased text-ink font-serif overflow-hidden relative">
+
+    <audio id="bg-music" loop>
+        <source src="your-romantic-song.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="lock-screen" class="fixed inset-0 bg-stone-950/90 backdrop-blur-sm flex flex-col items-center justify-center z-50 fade-transition opacity-100">
+        <div class="text-center flex flex-col items-center">
+            
+            <button id="unlock-btn" class="group relative flex items-center justify-center w-28 h-28 bg-gradient-to-br from-wax to-wax-dark rounded-full wax-seal hover:scale-105 transition-all duration-500 cursor-pointer animate-pulse">
+                <div class="w-24 h-24 rounded-full border border-red-900/50 flex items-center justify-center">
+                    <span class="font-seal text-5xl text-red-100 opacity-90 group-hover:opacity-100 drop-shadow-md">M</span>
+                </div>
+            </button>
+            
+            <p class="text-stone-400 font-handwriting text-2xl mt-8 tracking-wide">Break the seal...</p>
+        </div>
+    </div>
+
+    <div id="letter-screen" class="fade-transition opacity-0 scale-95 hidden w-full max-w-3xl relative z-10 my-8">
+        
+        <div class="paper-texture p-8 md:p-16 border border-stone-300 rounded-sm relative">
+            
+            <div class="absolute top-8 right-8 text-right opacity-70">
+                <p class="text-xs uppercase tracking-widest border-b border-stone-400 pb-1 mb-1">Delivered On</p>
+                <p class="font-handwriting text-xl">Our Monthsary</p>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl mt-12 mb-10 font-medium text-stone-800 tracking-tight">My Dearest,</h1>
+
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+                
+                <div class="space-y-6 text-lg md:text-xl leading-relaxed text-stone-700 flex-1">
+                    <p class="drop-cap">
+                        Happy monthsary. I wanted to create something a little different this time—a quiet place just for us, away from the noise of everything else. A place that feels like home.
+                    </p>
+                    <p>
+                        Every day with you brings a warmth I didn't know I was missing. I cherish the small moments, the quiet laughter, and the way you make the ordinary feel extraordinary. Looking back at the time we've shared, I am constantly reminded of how lucky I am to have you by my side.
+                    </p>
+                    <p>
+                        Here is to all the memories we've made so far, and to the beautiful ones we have yet to create. Thank you for being my safe haven.
+                    </p>
+                </div>
+
+                <div class="polaroid w-64 -rotate-3 self-center md:self-start flex-shrink-0 mt-4 md:mt-0 relative z-10">
+                    <div class="w-full h-56 bg-stone-300 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=600&auto=format&fit=crop" alt="Us" class="w-full h-full object-cover filter sepia-[.3] contrast-125">
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="font-handwriting text-2xl text-stone-800">You & Me</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-16 text-right border-t border-stone-300/50 pt-8">
+                <p class="mb-2 italic text-stone-600">Forever yours,</p>
+                <p class="font-handwriting text-5xl text-stone-800">[Your Name]</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const lockScreen = document.getElementById('lock-screen');
+        const letterScreen = document.getElementById('letter-screen');
+        const unlockBtn = document.getElementById('unlock-btn');
+        const bgMusic = document.getElementById('bg-music');
+
+        unlockBtn.addEventListener('click', () => {
+            // Stop the pulsing animation when clicked
+            unlockBtn.classList.remove('animate-pulse');
+            
+            // Fade out the lock screen
+            lockScreen.classList.remove('opacity-100');
+            lockScreen.classList.add('opacity-0');
+
+            // Play the music
+            bgMusic.play().catch(err => console.log("Audio requires user interaction first.", err));
+
+            // Transition to letter
+            setTimeout(() => {
+                lockScreen.classList.add('hidden');
+                
+                // Make the page scrollable once the letter is revealed
+                document.body.classList.remove('overflow-hidden');
+                document.body.classList.add('overflow-y-auto');
+
+                letterScreen.classList.remove('hidden');
+                
+                requestAnimationFrame(() => {
+                    letterScreen.classList.remove('opacity-0', 'scale-95');
+                    letterScreen.classList.add('opacity-100', 'scale-100');
+                });
+                
+            }, 1200); 
+        });
+    </script>
+</body>
+</html>
